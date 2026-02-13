@@ -85,7 +85,7 @@ void ImuToTF::imuCallback(const sensor_msgs::msg::Imu::ConstSharedPtr msg)
 			tf2::Transform tmp_t;
 			tf2::fromMsg(tmp.transform, tmp_t);
 			tf2::Quaternion q;
-			q.setRPY(0.0,0.0,tf2::getYaw(tmp_t.getRotation()));
+			q.setRPY(0.0,0.0,tf2::impl::getYaw(tmp_t.getRotation()));
 			tf2::Transform t = tf2::Transform(q)*st*tmp_t.inverse(); // base_frame orientation
 			st.setRotation(t.getRotation());
 			childFrameId = baseFrameId_;
